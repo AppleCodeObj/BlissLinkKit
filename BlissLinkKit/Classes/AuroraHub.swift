@@ -36,6 +36,29 @@ class AuroraHub: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
 
+    // MARK: - AppDelegate 转发入口
+
+    /// 在 AppDelegate didRegisterForRemoteNotificationsWithDeviceToken 中调用
+    public func auroraDidRegisterDeviceToken(_ deviceToken: Data) {
+        let token = deviceToken.map { String(format: "%02x", $0) }.joined()
+        UserDefaults.standard.setValue(token, forKey: "auroraSelectPush")
+    }
+
+    /// 在 AppDelegate open url 中调用
+    public func auroraHandleOpen(_ url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) {
+        AppsFlyerLib.shared().handleOpen(url, options: options)
+    }
+
+    /// 在 AppDelegate open url sourceApplication 中调用
+    public func auroraHandleOpen(_ url: URL, sourceApplication: String?, annotation: Any) {
+        AppsFlyerLib.shared().handleOpen(url, sourceApplication: sourceApplication, withAnnotation: annotation)
+    }
+
+    /// 在 AppDelegate continue userActivity 中调用
+    public func auroraContinueUserActivity(_ userActivity: NSUserActivity) {
+        AppsFlyerLib.shared().continue(userActivity, restorationHandler: nil)
+    }
+
     // MARK: - Register
 
     func auroraRegisterPushAndTrackIDFA() {
@@ -46,6 +69,7 @@ class AuroraHub: NSObject {
     @objc func auroraRegisterTrack() {
         AppsFlyerLib.shared().appsFlyerDevKey = AuroraConfig.shared.appsFlyerDevKey
         AppsFlyerLib.shared().appleAppID = AuroraConfig.shared.appleAppID
+        AppsFlyerLib.shared().delegate = self
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
                 DispatchQueue.main.async {
@@ -295,6 +319,11 @@ class AuroraHub: NSObject {
             }
         }
     }
+}
+
+extension AuroraHub: AppsFlyerLibDelegate {
+    func onConversionDataSuccess(_ conversionInfo: [AnyHashable: Any]) {}
+    func onConversionDataFail(_ error: Error) {}
 }
 
 class AuroraProductDelegate: NSObject, SKProductsRequestDelegate {
