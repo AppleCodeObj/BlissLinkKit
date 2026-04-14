@@ -1,0 +1,6 @@
+framework module BlissLinkKit {
+  umbrella header "BlissLinkKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

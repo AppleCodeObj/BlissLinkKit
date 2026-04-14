@@ -1,0 +1,16 @@
+PODS:
+  - BlissLinkKit (0.1.0)
+
+DEPENDENCIES:
+  - BlissLinkKit (from `../`)
+
+EXTERNAL SOURCES:
+  BlissLinkKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BlissLinkKit: 255c1ac3ad0502806611d97e8939cf15e5d4089e
+
+PODFILE CHECKSUM: aa2086808f8e55f2045178be8ee066aa0e255f51
+
+COCOAPODS: 1.16.2

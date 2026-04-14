@@ -1,0 +1,6 @@
+framework module Pods_BlissLinkKit_Tests {
+  umbrella header "Pods-BlissLinkKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
