@@ -10,7 +10,7 @@ extension Notification.Name {
     static let auroraAppBecameActive = Notification.Name(UIApplication.didBecomeActiveNotification.rawValue)
 }
 
-extension UIWindow {
+public extension UIWindow {
     static var auroraCurrent: UIWindow? {
         if #available(iOS 13.0, *) {
             let scene: UIWindowScene? = UIApplication.shared.connectedScenes.first as? UIWindowScene

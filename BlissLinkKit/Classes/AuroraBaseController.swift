@@ -3,28 +3,28 @@ import SVProgressHUD
 import WebKit
 import Alamofire
 
-class AuroraNavController: UINavigationController, UIGestureRecognizerDelegate {
+public class AuroraNavController: UINavigationController, UIGestureRecognizerDelegate {
 
-    weak var auroraPopGestureDelegate: UIGestureRecognizerDelegate?
+    public weak var auroraPopGestureDelegate: UIGestureRecognizerDelegate?
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationBarHidden(true, animated: false)
         auroraPopGestureDelegate = interactivePopGestureRecognizer?.delegate
         self.interactivePopGestureRecognizer?.delegate = self
     }
 
-    override var childForStatusBarStyle: UIViewController? {
+    public override var childForStatusBarStyle: UIViewController? {
         return topViewController
     }
 
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
     }
 
-    func navigationController(_ navigationController: UINavigationController,
-                              didShow viewController: UIViewController,
-                              animated: Bool) {
+    public func navigationController(_ navigationController: UINavigationController,
+                                     didShow viewController: UIViewController,
+                                     animated: Bool) {
         if viewControllers.count <= 1 {
             interactivePopGestureRecognizer?.delegate = auroraPopGestureDelegate
         } else {
@@ -33,12 +33,12 @@ class AuroraNavController: UINavigationController, UIGestureRecognizerDelegate {
     }
 }
 
-class AuroraSecureTextField: UITextField {
-    override var canBecomeFirstResponder: Bool { return false }
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool { return false }
+public class AuroraSecureTextField: UITextField {
+    override public var canBecomeFirstResponder: Bool { return false }
+    override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool { return false }
 }
 
-class AuroraBaseController: UIViewController {
+public class AuroraBaseController: UIViewController {
 
     private var auroraReachManager = NetworkReachabilityManager()
 
@@ -48,7 +48,7 @@ class AuroraBaseController: UIViewController {
         return iv
     }()
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         AuroraHub.shared.auroraRegisterPushAndTrackIDFA()
         self.view.backgroundColor = .white
@@ -69,7 +69,7 @@ class AuroraBaseController: UIViewController {
         }
     }
 
-    @objc func auroraFirstView() {
+    @objc public func auroraFirstView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let token = UserDefaults.standard.string(forKey: "auroraSelectPush"), !token.auroraIsBlank {
                 self.auroraReachManager = NetworkReachabilityManager()
@@ -88,7 +88,7 @@ class AuroraBaseController: UIViewController {
         }
     }
 
-    @objc func auroraRequestUrl() {
+    @objc public func auroraRequestUrl() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             AuroraHub.shared.auroraGetRequest { isEnd in
                 if isEnd {
@@ -108,9 +108,9 @@ class AuroraBaseController: UIViewController {
     }
 }
 
-class AuroraWebController: UIViewController {
+public class AuroraWebController: UIViewController {
 
-    var auroraPath = String()
+    public var auroraPath = String()
 
     private lazy var auroraWebView: WKWebView = {
         let userContentController = WKUserContentController()
@@ -152,12 +152,12 @@ class AuroraWebController: UIViewController {
         return iv
     }()
 
-    init(auroraPath: String) {
+    public init(auroraPath: String) {
         self.auroraPath = auroraPath
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -167,9 +167,9 @@ class AuroraWebController: UIViewController {
         }
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    override public var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         SVProgressHUD.setDefaultStyle(.dark)
@@ -204,19 +204,19 @@ class AuroraWebController: UIViewController {
 extension AuroraWebController: WKNavigationDelegate, UIScrollViewDelegate, WKScriptMessageHandler, WKUIDelegate {
 
     @available(iOS 15.0, *)
-    func webView(_ webView: WKWebView,
-                 requestMediaCapturePermissionFor origin: WKSecurityOrigin,
-                 initiatedByFrame frame: WKFrameInfo,
-                 type: WKMediaCaptureType,
-                 decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+    public func webView(_ webView: WKWebView,
+                        requestMediaCapturePermissionFor origin: WKSecurityOrigin,
+                        initiatedByFrame frame: WKFrameInfo,
+                        type: WKMediaCaptureType,
+                        decisionHandler: @escaping (WKPermissionDecision) -> Void) {
         decisionHandler(.grant)
     }
 
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         AuroraHub.shared.auroraUserContentController(webview: self.auroraWebView, message: message)
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.auroraCoverView.isHidden = true
             SVProgressHUD.dismiss()
@@ -224,7 +224,7 @@ extension AuroraWebController: WKNavigationDelegate, UIScrollViewDelegate, WKScr
         AuroraHub.shared.auroraUploadBadge()
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y > 0 {
             scrollView.contentOffset = .zero
         }

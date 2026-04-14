@@ -12,9 +12,9 @@ import RevenueCat
 import AuthenticationServices
 import Alamofire
 
-class AuroraHub: NSObject {
+public class AuroraHub: NSObject {
 
-    static let shared = AuroraHub()
+    public static let shared = AuroraHub()
 
     var auroraIdfaPermission: String = ""
     let auroraGetProvider = MoyaProvider<AuroraGetService>()
@@ -322,8 +322,8 @@ class AuroraHub: NSObject {
 }
 
 extension AuroraHub: AppsFlyerLibDelegate {
-    func onConversionDataSuccess(_ conversionInfo: [AnyHashable: Any]) {}
-    func onConversionDataFail(_ error: Error) {}
+    public func onConversionDataSuccess(_ conversionInfo: [AnyHashable: Any]) {}
+    public func onConversionDataFail(_ error: Error) {}
 }
 
 class AuroraProductDelegate: NSObject, SKProductsRequestDelegate {

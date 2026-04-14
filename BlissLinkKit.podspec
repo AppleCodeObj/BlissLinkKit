@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'BlissLinkKit'
-  s.version          = '1.0.0'
+  s.version          = '1.0.3'
   s.summary          = 'BlissLink shared components with RevenueCat, AppsFlyer, Moya integration.'
   s.description      = <<-DESC
     BlissLinkKit provides shared base components including:
@@ -10,8 +10,8 @@ Pod::Spec.new do |s|
   DESC
   s.homepage         = 'https://github.com/你的用户名/BlissLinkKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'AppleCodeObj' => '444693592@qq.com' }
-  s.source           = { :git => 'https://github.com/AppleCodeObj/BlissLinkKit.git', :tag => s.version.to_s }
+  s.author           = { '你的名字' => '你的邮箱' }
+  s.source           = { :git => 'https://github.com/你的用户名/BlissLinkKit.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '14.0'
   s.swift_version = '5.0'
