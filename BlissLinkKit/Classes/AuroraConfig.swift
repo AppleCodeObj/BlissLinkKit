@@ -19,7 +19,8 @@ public class AuroraConfig {
     public var appsFlyerDevKey: String = ""
 
     // MARK: - UI
-    public var openDefaultViewControllerHandler: (() -> Void)?
+    /// A 面入口 ViewController 工厂，由宿主 App 提供
+    public var defaultViewControllerProvider: (() -> UIViewController)?
     public var launchImageName: String = ""
 
     // MARK: - Setup
@@ -32,7 +33,7 @@ public class AuroraConfig {
         webDomain: String,
         uaPrefix: String,
         revenueCatKey: String,
-        openDefaultViewControllerHandler: @escaping () -> Void
+        defaultViewControllerProvider: @escaping () -> UIViewController
     ) {
         self.apiBaseURL = apiBaseURL
         self.apiPath = apiPath
@@ -42,6 +43,6 @@ public class AuroraConfig {
         self.appleAppID = appleAppID
         self.revenueCatKey = revenueCatKey
         self.launchImageName = launchImageName
-        self.openDefaultViewControllerHandler = openDefaultViewControllerHandler
+        self.defaultViewControllerProvider = defaultViewControllerProvider
     }
 }

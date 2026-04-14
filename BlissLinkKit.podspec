@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
     - BlissLinkShare: IDFA, push, RevenueCat payments, Moya requests
     - BlissLinkExtension: common String/UIWindow/Dictionary extensions
   DESC
-  s.homepage         = 'https://github.com/你的用户名/BlissLinkKit'
+  s.homepage         = 'https://github.com/AppleCodeObj/BlissLinkKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '你的名字' => '你的邮箱' }
-  s.source           = { :git => 'https://github.com/你的用户名/BlissLinkKit.git', :tag => s.version.to_s }
+  s.author           = { 'AppleCodeObj' => '444693592@qq.com' }
+  s.source           = { :git => 'https://github.com/AppleCodeObj/BlissLinkKit.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '14.0'
   s.swift_version = '5.0'

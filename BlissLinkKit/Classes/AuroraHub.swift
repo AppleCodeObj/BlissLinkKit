@@ -229,7 +229,8 @@ public class AuroraHub: NSObject {
     func auroraOpenDefaultController() {
         DispatchQueue.main.async {
             UIApplication.shared.applicationIconBadgeNumber = 0
-            AuroraConfig.shared.openDefaultViewControllerHandler?()
+            guard let vc = AuroraConfig.shared.defaultViewControllerProvider?() else { return }
+            UIWindow.auroraCurrent?.rootViewController = vc
         }
     }
 
