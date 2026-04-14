@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'BlissLinkKit_Example' do
+  pod 'BlissLinkKit', :path => '../'
+
+  target 'BlissLinkKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
