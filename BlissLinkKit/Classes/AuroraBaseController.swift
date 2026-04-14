@@ -7,6 +7,11 @@ public class AuroraNavController: UINavigationController, UIGestureRecognizerDel
 
     public weak var auroraPopGestureDelegate: UIGestureRecognizerDelegate?
 
+    /// 直接使用 AuroraNavController()，库自动以 AuroraBaseController 作为启动页
+    public convenience init() {
+        self.init(rootViewController: AuroraBaseController())
+    }
+
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
     }

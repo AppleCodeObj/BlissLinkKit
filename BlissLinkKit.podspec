@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'BlissLinkKit'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'BlissLink shared components with RevenueCat, AppsFlyer, Moya integration.'
   s.description      = <<-DESC
     BlissLinkKit provides shared base components including:
